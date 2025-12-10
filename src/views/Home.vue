@@ -90,6 +90,24 @@
             </li>
           </ul>
         </div>
+        
+        <div class="titan-card" id="signup-card">
+            <h3 class="uppercase text-gold" style="margin-bottom: 1.5rem;">Enlistment</h3>
+            <div class="input-group">
+              <div class="label-tag">CODENAME</div>
+              <input type="text" id="signup-codename" placeholder="CHOOSE YOUR CALLSIGN">
+            </div>
+            <div class="input-group">
+              <div class="label-tag">PASSPHRASE</div>
+              <input type="password" id="signup-passphrase" placeholder="CREATE A SECURE PHRASE">
+            </div>
+            <div class="input-group">
+              <div class="label-tag">CONFIRM PASSPHRASE</div>
+              <input type="password" id="signup-confirm" placeholder="REPEAT YOUR SECURE PHRASE">
+            </div>
+            <button id="signup-btn" class="btn btn-secondary" style="width: 100%; margin-top: 1rem;">REGISTER</button>
+            <div id="signup-msg" class="mono" style="margin-top: 1rem; height: 1.5rem; color: var(--accent-danger);"></div>
+        </div>
       </div>
     </div>
   </section>
@@ -237,10 +255,55 @@ onMounted(() => {
         }
     });
   };
+  const initSignup = () => {
+        const btn = document.getElementById('signup-btn');
+        const codenameInput = document.getElementById('signup-codename');
+        const passInput = document.getElementById('signup-passphrase');
+        const confirmInput = document.getElementById('signup-confirm');
+        const msg = document.getElementById('signup-msg');
+        const card = document.getElementById('signup-card');
+        
+        if(!btn) return;
+  
+        btn.addEventListener('click', () => {
+            const codename = codenameInput.value.trim();
+            const pass = passInput.value.trim();
+            const confirm = confirmInput.value.trim();
+  
+            if (!codename || !pass || !confirm) {
+                msg.textContent = '> ERROR: ALL FIELDS ARE REQUIRED.';
+                return;
+            }
+  
+            if (pass !== confirm) {
+                msg.textContent = '> ERROR: PASSPHRASES DO NOT MATCH.';
+                card.style.borderColor = 'var(--accent-danger)';
+                setTimeout(() => {
+                    card.style.borderColor = '';
+                }, 1000);
+                return;
+            }
+  
+            msg.textContent = '> REGISTRATION SUCCESSFUL. PROCEED TO LOGIN.';
+            msg.style.color = 'var(--accent-cyan)';
+            card.classList.add('success-glow');
+            
+            // Clear fields after a delay
+            setTimeout(() => {
+                codenameInput.value = '';
+                passInput.value = '';
+                confirmInput.value = '';
+                msg.textContent = '';
+                msg.style.color = 'var(--accent-danger)';
+                card.classList.remove('success-glow');
+            }, 3000);
+        });
+    };
 
   initHero();
   initScrollReveal();
   initLogin();
+  initSignup();
   console.log("MIDNIGHT WATCH // SYSTEM READY");
 });
 </script>
