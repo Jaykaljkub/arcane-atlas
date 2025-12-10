@@ -1,0 +1,6 @@
+
+[
+    { "id": "E-001", "codename": "The Static Man", "category": "Spectral", "threatLevel": "Moderate", "description": "Entity composed of white noise.", "restricted": false },
+    { "id": "E-004", "codename": "Hydra-Kin", "category": "Bio-Engineered", "threatLevel": "Critical", "description": "Regenerative apex predators.", "restricted": false },
+    { "id": "E-009", "codename": "Subject Omega", "category": "Unknown", "threatLevel": "Existential", "description": "REALITY FAILURE IMMINENT.", "restricted": true }
+]

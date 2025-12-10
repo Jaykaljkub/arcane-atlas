@@ -1,0 +1,52 @@
+[
+    {
+        "id": "HQ-01",
+        "type": "HQ",
+        "codename": "Midnight Prime",
+        "summary": "Primary command and control for global operations. Houses main archival servers and rapid response teams.",
+        "location": "London, UK",
+        "lat": 51.5074,
+        "lng": -0.1278,
+        "status": "Secure"
+    },
+    {
+        "id": "M-99",
+        "type": "Mission",
+        "codename": "Neon Rain",
+        "summary": "Investigate anomalous energy signatures and temporal distortions reported in the Shibuya district.",
+        "location": "Tokyo, Japan",
+        "lat": 35.6762,
+        "lng": 139.6503,
+        "status": "Active"
+    },
+    {
+        "id": "A-01",
+        "type": "Alert",
+        "codename": "Spectral Spike",
+        "summary": "A high-energy spectral event has occurred. Containment fields are failing. Immediate action required.",
+        "location": "Cairo, Egypt",
+        "lat": 30.0444,
+        "lng": 31.2357,
+        "status": "CRITICAL"
+    },
+    {
+        "id": "SH-04",
+        "type": "Safehouse",
+        "codename": "The Serpent's Coil",
+        "summary": "Subterranean facility for agent recovery and resupply. Low profile, heavily shielded.",
+        "location": "Marrakech, Morocco",
+        "lat": 31.6295,
+        "lng": -7.9811,
+        "status": "Standby"
+    },
+    {
+        "id": "M-102",
+        "type": "Mission",
+        "codename": "Whispering Gulch",
+        "summary": "A series of disappearances have been linked to a specific region in the Mojave. Investigate potential entity involvement.",
+        "location": "Nevada, USA",
+        "lat": 38.8026,
+        "lng": -116.4194,
+        "status": "Pending"
+    }
+]

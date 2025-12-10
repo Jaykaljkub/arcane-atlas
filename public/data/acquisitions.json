@@ -1,0 +1,54 @@
+[
+    {
+        "id": "AX-01",
+        "name": "Chrono-Spire",
+        "type": "Artifact",
+        "origin": "Dimension 7-B",
+        "status": "Contained",
+        "description": "A crystalline structure that appears to distort temporal flow in its immediate vicinity. Emits low-level temporal radiation.",
+        "stats": [
+            {"label": "Temporal Drift", "value": 95},
+            {"label": "Energy Output", "value": 70},
+            {"label": "Structural Integrity", "value": 45}
+        ]
+    },
+    {
+        "id": "WPN-77",
+        "name": "Null Cannon",
+        "type": "Weaponry",
+        "origin": "Black Site Delta",
+        "status": "Prototype",
+        "description": "Fires a concentrated sphere of absolute nothingness. Highly unstable and requires a dedicated power source.",
+        "stats": [
+            {"label": "Destructive Power", "value": 100},
+            {"label": "Stability", "value": 15},
+            {"label": "Rate of Fire", "value": 10}
+        ]
+    },
+    {
+        "id": "GEAR-03",
+        "name": "Phase Gauntlet",
+        "type": "Gear",
+        "origin": "Recovered from Entity-099",
+        "status": "Operational",
+        "description": "Allows the user to temporarily phase through solid matter. Extended use may lead to dimensional decoherence.",
+        "stats": [
+            {"label": "Phase Duration", "value": 60},
+            {"label": "Recharge Rate", "value": 75},
+            {"label": "Safety Protocols", "value": 30}
+        ]
+    },
+    {
+        "id": "BIO-42",
+        "name": "Symbiote Sample",
+        "type": "Biological",
+        "origin": "LV-426 Colony Incident",
+        "status": "Cryo-Sleep",
+        "description": "A parasitic organism that enhances host abilities at a terrible cost. Must not be thawed under any circumstances.",
+        "stats": [
+            {"label": "Aggression Index", "value": 88},
+            {"label": "Potential Enhancement", "value": 92},
+            {"label": "Containment Risk", "value": 98}
+        ]
+    }
+]
