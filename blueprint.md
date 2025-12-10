@@ -1,4 +1,4 @@
-# Midnight Watch // Secure Channel
+"""# Midnight Watch // Secure Channel
 
 ## Overview
 
@@ -31,6 +31,13 @@ This project is a Vue.js application that creates a futuristic, secure channel i
   - An "Operative Dossier Builder" that allows a user to fill out a form.
   - The form data dynamically updates a preview of an operative's ID card in real-time.
   - This is a UI mock-up, and the generated dossier is not saved.
+
+## Current Task: Login Modal
+
+- **Refactor Home.vue:** Update the `Home.vue` component to move the login form into a modal.
+- **Create Login Modal:** The login form will be displayed in a modal window.
+- **Trigger Modal:** The modal will be shown when the user clicks the "Access Secure Channel" button.
+- **Composition API:** Use Vue's Composition API to manage the modal's visibility and the form's state.
 
 ## Next Steps: Full-Stack Implementation Plan
 
@@ -93,3 +100,4 @@ The final step is to make the dossier builder functional.
   - In `Personnel.vue`, update the "Submit for Encryption" button to save the form data as a new document in the `personnel` collection in Firestore.
 - **2. Display Operative List:**
   - Enhance the `Personnel.vue` page to display a list of all existing operatives from the database.
+""

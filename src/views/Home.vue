@@ -5,9 +5,25 @@
       <div class="label-tag text-cyan">SECURE TRANSMISSION // LVL 5</div>
       <h1 class="hero-title">The Night Sees Everything.</h1>
       <p class="hero-sub mono">> In the darkness, we watch. In the silence, we act. Protocol 77-Omega is in effect.</p>
-      <a href="#access" class="btn btn-gold">Access Secure Channel</a>
+      <a href="#access" class="btn btn-gold" @click="showLoginModal = true">Access Secure Channel</a>
     </div>
   </section>
+
+  <div v-if="showLoginModal" class="modal-overlay" @click.self="showLoginModal = false">
+    <div class="titan-card" id="login-card">
+      <h3 class="uppercase text-cyan" style="margin-bottom: 1.5rem;">Operative Login</h3>
+      <div class="input-group">
+        <div class="label-tag">CODENAME</div>
+        <input type="text" v-model="codename" placeholder="ENTER CALLSIGN">
+      </div>
+      <div class="input-group">
+        <div class="label-tag">PASSPHRASE</div>
+        <input type="password" v-model="passphrase" @keyup.enter="handleLogin" placeholder="ENTER CLEARANCE PHRASE">
+      </div>
+      <button @click="handleLogin" class="btn" style="width: 100%; margin-top: 1rem;">AUTHENTICATE</button>
+      <div class="mono" style="margin-top: 1rem; height: 1.5rem;" :class="loginMessageColor">{{ loginMessage }}</div>
+    </div>
+  </div>
 
   <section class="section">
     <div class="container">
@@ -44,20 +60,6 @@
       </div>
 
       <div class="access-grid">
-        <div class="titan-card" id="login-card">
-          <h3 class="uppercase text-cyan" style="margin-bottom: 1.5rem;">Operative Login</h3>
-          <div class="input-group">
-            <div class="label-tag">CODENAME</div>
-            <input type="text" placeholder="ENTER CALLSIGN">
-          </div>
-          <div class="input-group">
-            <div class="label-tag">PASSPHRASE</div>
-            <input type="password" id="passphrase-input" placeholder="ENTER CLEARANCE PHRASE">
-          </div>
-          <button id="login-btn" class="btn" style="width: 100%; margin-top: 1rem;">AUTHENTICATE</button>
-          <div id="login-msg" class="mono" style="margin-top: 1rem; height: 1.5rem; color: var(--accent-danger);"></div>
-        </div>
-
         <div class="titan-card">
           <div class="label-tag text-gold">LATEST INTEL</div>
           <ul class="mono" style="margin-top: 1rem;">
@@ -125,11 +127,52 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import * as THREE from 'three';
 
 const router = useRouter();
+
+const showLoginModal = ref(false);
+const codename = ref('');
+const passphrase = ref('');
+const loginMessage = ref('');
+const loginStatus = ref(''); // 'success' or 'error'
+
+const loginMessageColor = computed(() => {
+  if (loginStatus.value === 'success') {
+    return 'text-cyan';
+  } else if (loginStatus.value === 'error') {
+    return 'text-danger';
+  }
+  return '';
+});
+
+const handleLogin = () => {
+  if (passphrase.value.toUpperCase().trim() === 'SPECTRAL-ACCESS') {
+    loginMessage.value = '> IDENTITY CONFIRMED. WELCOME, AGENT.';
+    loginStatus.value = 'success';
+    // Add success glow effect
+    const loginCard = document.getElementById('login-card');
+    if (loginCard) {
+      loginCard.classList.add('success-glow');
+    }
+    setTimeout(() => {
+      router.push('/dashboard');
+    }, 1500);
+  } else {
+    loginMessage.value = '> ERROR: INVALID CREDENTIALS.';
+    loginStatus.value = 'error';
+    // Add error indication
+    const loginCard = document.getElementById('login-card');
+    if (loginCard) {
+      loginCard.style.borderColor = 'var(--accent-danger)';
+      setTimeout(() => {
+          loginCard.style.borderColor = '';
+      }, 1000);
+    }
+  }
+};
 
 onMounted(() => {
   const initHero = () => {
@@ -213,33 +256,6 @@ onMounted(() => {
     });
   };
 
-  const initLogin = () => {
-    const btn = document.getElementById('login-btn');
-    const input = document.getElementById('passphrase-input');
-    const msg = document.getElementById('login-msg');
-    const card = document.getElementById('login-card');
-
-    if(!btn) return;
-
-    btn.addEventListener('click', () => {
-        const phrase = input.value.toUpperCase().trim();
-        if (phrase === 'SPECTRAL-ACCESS') {
-            msg.textContent = '> IDENTITY CONFIRMED. WELCOME, AGENT.';
-            msg.style.color = 'var(--accent-cyan)';
-            card.classList.add('success-glow');
-            setTimeout(() => {
-                router.push('/dashboard');
-            }, 1500);
-        } else {
-            msg.textContent = '> ERROR: INVALID CREDENTIALS.';
-            msg.style.color = 'var(--accent-danger)';
-            card.style.borderColor = 'var(--accent-danger)';
-            setTimeout(() => {
-                card.style.borderColor = '';
-            }, 1000);
-        }
-    });
-  };
   const initSignup = () => {
         const btn = document.getElementById('signup-btn');
         const codenameInput = document.getElementById('signup-codename');
@@ -287,7 +303,6 @@ onMounted(() => {
 
   initHero();
   initScrollReveal();
-  initLogin();
   initSignup();
   console.log("MIDNIGHT WATCH // SYSTEM READY");
 });
@@ -302,6 +317,20 @@ onMounted(() => {
   gap: 4rem;
   align-items: center;
 }
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
 
 @media (max-width: 768px) {
   .directive-grid {
