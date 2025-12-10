@@ -10,7 +10,7 @@
                 <li><router-link to="/bestiary" class="nav-item" active-class="active">Bestiary</router-link></li>
                 <li><router-link to="/missions" class="nav-item" active-class="active">Missions</router-link></li>
                 <li><router-link to="/reliquary" class="nav-item" active-class="active">Reliquary</router-link></li>
-                <li><a href="#" class="nav-item">Personnel</a></li>
+                <li><router-link to="/personnel" class="nav-item" active-class="active">Personnel</router-link></li>
             </ul>
             <div class="mono text-gold">SYS.ONLINE</div>
         </nav>
@@ -55,12 +55,14 @@ function handleMissionClick(mission) {
     closeAllMarkers();
     const marker = document.getElementById(`marker-${mission.id}`);
     if (marker) marker.classList.add('visible');
+    document.querySelector('.instructions').style.display = 'none';
 }
 
 function closeAllMarkers() {
     document.querySelectorAll('.mission-marker').forEach(el => {
         el.classList.remove('visible');
     });
+    document.querySelector('.instructions').style.display = 'block';
 };
 
 onMounted(async () => {
@@ -198,140 +200,147 @@ onMounted(async () => {
 });
 </script>
 
-<style scoped>
-@import '../assets/styles.css';
-
-body {
-    margin: 0;
-    overflow: hidden;
-}
-
-.top-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 100;
-}
-
-.mission-marker {
-    position: absolute;
-    background: rgba(5, 10, 20, 0.95);
-    border: 1px solid var(--accent-gold);
-    padding: 12px;
-    border-radius: 2px;
-    transform: translate(-50%, -130%);
-    pointer-events: auto;
-    width: 260px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.8);
-    font-family: var(--font-display);
-    transition: opacity 0.3s, transform 0.3s;
-    display: none;
-    opacity: 0;
-}
-
-.mission-marker.visible {
-    display: block;
-    opacity: 1;
-    transform: translate(-50%, -130%);
-}
-
-.mission-marker::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    border-left: 8px solid transparent;
-    border-right: 8px solid transparent;
-    border-top: 10px solid;
-    border-top-color: inherit;
-}
-
-.mission-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-    padding-bottom: 8px;
-    margin-bottom: 8px;
-    font-size: 0.7rem;
-    font-family: var(--font-mono);
-    letter-spacing: 1px;
-}
-
-.header-icon { font-size: 1rem; margin-right: 8px; }
-
-.mission-title {
-    font-weight: 700;
-    text-transform: uppercase;
-    font-size: 1.1rem;
-    line-height: 1;
-    margin-bottom: 6px;
-    color: #fff;
-}
-
-.mission-desc {
-    font-size: 0.85rem;
-    color: var(--text-dim);
-    line-height: 1.4;
-    margin-bottom: 10px;
-}
-
-.mission-meta {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    font-weight: 600;
-    letter-spacing: 1px;
-    display: flex;
-    justify-content: space-between;
-}
-
-.close-hint {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    font-size: 0.8rem;
-    color: var(--text-dim);
-    cursor: pointer;
-}
-.close-hint:hover { color: #fff; }
-
-.controls {
-    position: absolute;
-    bottom: 2rem;
-    right: 2rem;
-    z-index: 10;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-.control-btn {
-    background: rgba(0,0,0,0.6);
-    border: 1px solid var(--text-dim);
-    color: var(--text-light);
-    padding: 0.5rem 1rem;
-    cursor: pointer;
-    font-family: var(--font-mono);
-    text-transform: uppercase;
-    transition: 0.3s;
-}
-.control-btn:hover {
-    border-color: var(--accent-cyan);
-    color: var(--accent-cyan);
-    background: rgba(0, 243, 255, 0.1);
-}
-
-.instructions {
-    position: absolute;
-    bottom: 2rem;
-    left: 2rem;
-    font-family: var(--font-mono);
-    color: var(--accent-gold);
-    font-size: 0.8rem;
-    background: rgba(0,0,0,0.5);
-    padding: 0.5rem;
-    border-left: 2px solid var(--accent-gold);
-    pointer-events: none;
-}
-</style>
+<style>
+    .mission-marker {
+        position: absolute;
+        background: rgba(5, 10, 20, 0.95);
+        border: 1px solid var(--accent-gold);
+        padding: 12px;
+        border-radius: 2px;
+        transform: translate(-50%, -130%);
+        pointer-events: auto; /* Ensures you can click buttons inside the marker */
+        width: 260px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.8);
+        font-family: var(--font-display);
+        
+        /* Hiding logic */
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s, transform 0.3s, visibility 0.3s;
+        z-index: 10; /* Ensure it sits above the canvas */
+    }
+    
+    .mission-marker.visible {
+        visibility: visible;
+        opacity: 1;
+        transform: translate(-50%, -130%);
+    }
+    
+    .mission-marker::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-top: 10px solid;
+        border-top-color: inherit;
+    }
+    
+    .mission-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        padding-bottom: 8px;
+        margin-bottom: 8px;
+        font-size: 0.7rem;
+        font-family: var(--font-mono);
+        letter-spacing: 1px;
+    }
+    
+    .header-icon { font-size: 1rem; margin-right: 8px; }
+    
+    .mission-title {
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 1.1rem;
+        line-height: 1;
+        margin-bottom: 6px;
+        color: #fff;
+    }
+    
+    .mission-desc {
+        font-size: 0.85rem;
+        color: var(--text-dim);
+        line-height: 1.4;
+        margin-bottom: 10px;
+    }
+    
+    .mission-meta {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        font-weight: 600;
+        letter-spacing: 1px;
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .close-hint {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        font-size: 0.8rem;
+        color: var(--text-dim);
+        cursor: pointer;
+    }
+    .close-hint:hover { color: #fff; }
+    </style>
+    
+    <style scoped>
+    @import '../assets/styles.css';
+    
+    body {
+        margin: 0;
+        overflow: hidden;
+    }
+    
+    .top-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 100;
+    }
+    
+    .controls {
+        position: absolute;
+        bottom: 2rem;
+        right: 2rem;
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .control-btn {
+        background: rgba(0,0,0,0.6);
+        border: 1px solid var(--text-dim);
+        color: var(--text-light);
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        font-family: var(--font-mono);
+        text-transform: uppercase;
+        transition: 0.3s;
+    }
+    
+    .control-btn:hover {
+        border-color: var(--accent-cyan);
+        color: var(--accent-cyan);
+        background: rgba(0, 243, 255, 0.1);
+    }
+    
+    .instructions {
+        position: absolute;
+        bottom: 2rem;
+        left: 2rem;
+        font-family: var(--font-mono);
+        color: var(--accent-gold);
+        font-size: 0.8rem;
+        background: rgba(0,0,0,0.5);
+        padding: 0.5rem;
+        border-left: 2px solid var(--accent-gold);
+        pointer-events: none;
+    }
+    </style>

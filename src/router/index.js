@@ -4,6 +4,7 @@ import Bestiary from '../views/Bestiary.vue'
 import Dashboard from '../views/Dashboard.vue'
 import Reliquary from '../views/Reliquary.vue'
 import Missions from '../views/Missions.vue'
+import Personnel from '../views/Personnel.vue'
 
 const routes = [
   {
@@ -30,6 +31,11 @@ const routes = [
     path: '/missions',
     name: 'Missions',
     component: Missions
+  },
+  {
+    path: '/personnel',
+    name: 'Personnel',
+    component: Personnel
   }
 ]
 
