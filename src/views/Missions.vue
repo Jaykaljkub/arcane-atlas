@@ -1,20 +1,5 @@
 <template>
     <div>
-        <nav class="top-bar">
-            <div class="brand">
-                <div class="brand-icon"></div>
-                MIDNIGHT WATCH
-            </div>
-            <ul class="nav-links uppercase mono">
-                <li><router-link to="/" class="nav-item" active-class="active">Command</router-link></li>
-                <li><router-link to="/bestiary" class="nav-item" active-class="active">Bestiary</router-link></li>
-                <li><router-link to="/missions" class="nav-item" active-class="active">Missions</router-link></li>
-                <li><router-link to="/reliquary" class="nav-item" active-class="active">Reliquary</router-link></li>
-                <li><router-link to="/personnel" class="nav-item" active-class="active">Personnel</router-link></li>
-            </ul>
-            <div class="mono text-gold">SYS.ONLINE</div>
-        </nav>
-
         <div id="globeViz"></div>
         
         <div class="instructions">

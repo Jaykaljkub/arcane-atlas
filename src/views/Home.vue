@@ -1,19 +1,4 @@
 <template>
-  <nav class="top-bar">
-    <div class="brand">
-      <div class="brand-icon"></div>
-      MIDNIGHT WATCH
-    </div>
-    <ul class="nav-links uppercase mono">
-      <li><router-link to="/" class="nav-item" active-class="active">Command</router-link></li>
-      <li><router-link to="/bestiary" class="nav-item" active-class="active">Bestiary</router-link></li>
-      <li><router-link to="/missions" class="nav-item" active-class="active">Missions</router-link></li>
-      <li><router-link to="/reliquary" class="nav-item" active-class="active">Reliquary</router-link></li>
-      <li><router-link to="/personnel" class="nav-item" active-class="active">Personnel</router-link></li>
-    </ul>
-    <div class="mono text-gold">SYS.ONLINE</div>
-  </nav>
-
   <section id="hero">
     <canvas id="hero-canvas"></canvas>
     <div class="container hero-content">
@@ -30,7 +15,7 @@
         <h2 class="section-title">The Directive</h2>
         <span class="mono text-dim">EST. 1982 // CLASSIFIED</span>
       </div>
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;">
+      <div class="directive-grid">
         <div class="reveal-text">
           <p class="text-light" style="font-size: 1.2rem; margin-bottom: 1.5rem;">
             Humanity exists in a fragile bubble of ignorance. Outside that bubble, in the chaotic void, entities of impossible geometry and ancient hunger wait.
@@ -310,4 +295,18 @@ onMounted(() => {
 
 <style scoped>
 @import '../assets/styles.css';
+
+.directive-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .directive-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
 </style>

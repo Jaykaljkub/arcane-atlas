@@ -336,4 +336,15 @@
             .hero-content { padding-left: 1rem; border: none; }
             .top-bar { padding: 0 1rem; }
             .nav-links { display: none; } /* Hidden for simplicity in this demo */
+            .department-grid { grid-template-columns: 1fr; }
+            .access-grid { grid-template-columns: 1fr; }
+            .section-title { font-size: 2.2rem; }
+            .container { padding: 0 1rem; }
+            .section { padding: 4rem 0; }
+        }
+
+        @media (max-width: 480px) {
+            .brand { font-size: 1.2rem; letter-spacing: 2px; }
+            .hero-title { font-size: 2.5rem; }
+            .hero-subtext { font-size: 0.9rem; }
         }
